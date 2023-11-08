@@ -1,0 +1,70 @@
+/*
+  Name: Yen Ton
+  Date: November 7, 2023
+  This is the styles.css page for the pokemon project.
+*/
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0; /* Light grey background */
+    color: #333; /* Dark grey text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #ffcb05; /* Bright yellow for the header */
+    color: #2a75bb; /* Pokédex blue for the title */
+    padding: 20px;
+    width: 100%;
+}
+
+main {
+    text-align: center;
+    padding: 1em;
+    flex: 1;
+}
+
+#search-section {
+    margin-top: 2em;
+}
+
+#pokemon-info {
+    margin-top: 2em;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px; /* Max width for the info section */
+    width: 100%;
+}
+
+.pokemon-detail {
+    margin: 1em 0;
+    padding: 0.5em;
+}
+
+/* Adding styles for buttons */
+button {
+    background-color: #2a75bb; /* Pokédex blue for buttons */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ffcb05; /* Bright yellow on hover */
+}
+
+/* Styling for input fields */
+input[type="text"] {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd; /* Light grey border */
+    border-radius: 5px;
+}

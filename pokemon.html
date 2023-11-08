@@ -1,0 +1,30 @@
+<!--
+  Name: Yen Ton
+  Date: November 7, 2023
+  This is the pokemon.html page that allows user to look for a pokemon of their choice. They can also choose to see a random pokemon.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Information</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="pokemon.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Pokémon Information Viewer</h1>
+    </header>
+    <main>
+        <section id="search-section">
+            <p>Please type in a Pokémon name. For example: Pikachu, Eevee, Snorlax, etc. or click on "Random Pokémon" below.</p>
+            <input type="text" id="pokemon-search-input" placeholder="Enter Pokémon name...">
+            <button id="search-button">Search</button>
+            <button id="random-button">Random Pokémon</button>
+        </section>
+        <section id="pokemon-info">
+        </section>
+    </main>
+</body>
+</html>
