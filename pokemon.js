@@ -1,15 +1,24 @@
 /*
  * Name: Yen Ton
  * Date: November 07, 2023
- * This is the JS to implement the UI for Pokemon project
+ * This JavaScript file implements the user interface for a Pokémon project.
+ * It allows users to search for details on Pokémon by name or display a random Pokémon.
  */
 
 "use strict";
 
 (function() {
+    /** Base URL for the Pokémon API */
     const BASE_API_URL = "https://pokeapi.co/api/v2/pokemon/";
-    const TOTAL_POKEMON = 898; // Total number of Pokémon as of Generation VIII
+    /** Total number of Pokémon as of Generation VIII */
+    const TOTAL_POKEMON = 898;
 
+    /**
+     * Checks the response status and throws an error for non-OK statuses.
+     * @param {Response} response - The fetch response object.
+     * @returns {Response} The response object if the request was successful.
+     * @throws Will throw an error if the response is not ok.
+     */
     function statusCheck(response) {
         if (!response.ok) {
             if (response.status === 404) {
@@ -20,12 +29,20 @@
         return response;
     }
 
+    /**
+     * Handles errors by displaying an error message in the info section.
+     * @param {Error} error - The error object to handle.
+     */
     function handleError(error) {
         const infoSection = document.getElementById("pokemon-info");
         infoSection.innerHTML = ""; // Clear any previous content
         infoSection.textContent = error.message || "An unexpected error occurred.";
     }
 
+    /**
+     * Displays Pokémon data in the UI.
+     * @param {Object} data - The Pokémon data object to display.
+     */
     function displayPokemon(data) {
         const infoSection = document.getElementById("pokemon-info");
         infoSection.innerHTML = ""; // Clear previous data
@@ -34,9 +51,6 @@
         const name = document.createElement("h2");
         name.textContent = "Name: " + data.name.charAt(0).toUpperCase() + data.name.slice(1);
         infoSection.appendChild(name);
-
-        console.log(data);
-        console.log(data.sprites);
 
         // Image or Placeholder
         const imgContainer = document.createElement("div");
@@ -66,14 +80,16 @@
 
         // Games
         const games = document.createElement("p");
-        if (data.game_indices.length > 0) {
-            games.textContent = "Games: " + data.game_indices.map(g => g.version.name).join(", ");
-        } else {
-            games.textContent = "The Pokémon is not in any games.";
-        }
+        games.textContent = data.game_indices.length > 0 ? 
+            "Games: " + data.game_indices.map(g => g.version.name).join(", ") :
+            "The Pokémon is not in any games.";
         infoSection.appendChild(games);
     }
 
+    /**
+     * Fetches data for a given Pokémon name and displays it.
+     * @param {string} pokemonName - The name of the Pokémon to fetch data for.
+     */
     function fetchPokemonData(pokemonName) {
         fetch(BASE_API_URL + pokemonName.toLowerCase())
             .then(statusCheck)
@@ -82,6 +98,9 @@
             .catch(handleError);
     }
 
+    /**
+     * Initiates a search for the Pokémon entered in the search input.
+     */
     function searchPokemon() {
         const pokemonName = document.getElementById("pokemon-search-input").value.trim();
         if (pokemonName) {
@@ -91,11 +110,15 @@
         }
     }
 
+    /**
+     * Fetches and displays data for a random Pokémon.
+     */
     function fetchRandomPokemon() {
         const randomId = Math.floor(Math.random() * TOTAL_POKEMON) + 1;
         fetchPokemonData(randomId.toString());
     }
 
+    // Sets up event listeners once the window has loaded
     window.addEventListener("load", function() {
         const searchButton = document.getElementById("search-button");
         searchButton.addEventListener("click", searchPokemon);
@@ -103,7 +126,6 @@
         const randomButton = document.getElementById("random-button");
         randomButton.addEventListener("click", fetchRandomPokemon);
 
-        // Also trigger search on enter key press in the input field
         const searchInput = document.getElementById("pokemon-search-input");
         searchInput.addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
